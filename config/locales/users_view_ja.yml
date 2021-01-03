@@ -1,0 +1,12 @@
+ja:
+  users:
+    index:
+      title: ユーザー一覧
+  header:
+    book_index: 本一覧
+    user_index: ユーザー一覧
+    edit_profile: ユーザー情報の編集
+    logout: ログアウト
+    login: ログイン
+    sign_up: 新規登録
+    login_user: "%{name}でログインしています。"

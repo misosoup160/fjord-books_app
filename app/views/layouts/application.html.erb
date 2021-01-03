@@ -13,14 +13,14 @@
     <div class='nav'>
       <p>
         <% if user_signed_in? %>
-          <strong><%= current_user.name %></strong>でログインしています。
-          <%= link_to '本一覧', books_path %> |
-          <%= link_to 'ユーザー一覧', users_path %> |
-          <%= link_to 'プロフィールの変更', edit_user_registration_path %> |
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= t('header.login_user', name: current_user.name)%>
+          <%= link_to t('header.book_index'), books_path %> |
+          <%= link_to t('header.user_index'), users_path %> |
+          <%= link_to t('header.edit_profile'), edit_user_registration_path %> |
+          <%= link_to t('header.logout'), destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= link_to "新規登録", new_user_registration_path %> |
-          <%= link_to "ログイン", new_user_session_path %>
+          <%= link_to t('header.sign_up'), new_user_registration_path %> |
+          <%= link_to t('header.login'), new_user_session_path %>
         <% end %>
       </p>
     </div>
