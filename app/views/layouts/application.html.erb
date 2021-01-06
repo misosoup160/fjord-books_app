@@ -10,6 +10,26 @@
   </head>
 
   <body>
+    <div class='nav'>
+      <p>
+        <% if user_signed_in? %>
+          <%= t('header.login_user', name: current_user.name)%>
+          <%= link_to t('header.book_index'), books_path %> |
+          <%= link_to t('header.user_index'), users_path %> |
+          <%= link_to t('header.edit_profile'), edit_user_registration_path %> |
+          <%= link_to t('header.logout'), destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to t('header.sign_up'), new_user_registration_path %> |
+          <%= link_to t('header.login'), new_user_session_path %>
+        <% end %>
+      </p>
+    </div>
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
