@@ -64,3 +64,7 @@ gem 'carrierwave'
 gem 'devise'
 gem 'devise-i18n'
 gem 'kaminari'
+
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'dotenv-rails'
