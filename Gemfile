@@ -65,6 +65,6 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'kaminari'
 
+gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-github'
-gem 'dotenv-rails'
