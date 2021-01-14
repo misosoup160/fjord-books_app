@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   has_one_attached :image
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[github]
@@ -22,8 +22,8 @@ class User < ApplicationRecord
 
   def image_type
     return unless image.attached?
-    if !image.blob.content_type.in?(%('image/jpeg image/jpg image/png image/gif'))
-      errors.add(:image, 'はjpegまたはpngまたはgif形式でアップロードしてください')
-    end
+
+    file_type = %w[image/jpeg image/jpg image/png image/gif]
+    errors.add(:image, 'はjpegまたはpngまたはgif形式でアップロードしてください') unless image.blob.content_type.in?(file_type)
   end
 end

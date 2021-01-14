@@ -20,6 +20,6 @@
 
 <div class="field">
   <%= f.label :image %>
-  <%= image_tag @user.image.variant(resize: '80x80') if @user.image.attached? %><br>
+  <%= image_tag @user.image.variant(resize: '80x80') if @user.image.attached? && @user.image.blob&.persisted? %><br>
   <%= f.file_field :image %>
 </div>
