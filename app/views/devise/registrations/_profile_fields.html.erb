@@ -17,3 +17,9 @@
   <%= f.label :self_introduction %>
   <%= f.text_area :self_introduction %>
 </div>
+
+<div class="field">
+  <%= f.label :image %>
+  <%= image_tag @user.image.variant(resize: '80x80') if @user.image.attached? && @user.image.blob&.persisted? %><br>
+  <%= f.file_field :image %>
+</div>
