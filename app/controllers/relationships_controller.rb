@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class RelationshipsController < ApplicationController
-  def create 
+  def create
     @user = User.find(params[:follow_id])
     current_user.follow(@user)
     flash[:notice] = 'ユーザーをフォローしました'
