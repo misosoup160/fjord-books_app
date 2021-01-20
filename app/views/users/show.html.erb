@@ -35,6 +35,20 @@
   <% end %>
 </p>
 
+<p>
+  <strong>フォロー数:</strong>
+  <a href="<%= following_user_path(@user) %>">
+    <%= @user.followings.count %>
+  </a>
+</p>
+
+<p>
+  <strong>フォロワー数:</strong>
+  <a href="<%= followers_user_path(@user) %>">
+    <%= @user.followers.count %>
+  </a>
+</p>
+
 <%= render 'relationships/follow_button', user: @user %>
 
 <% if current_user == @user %>
