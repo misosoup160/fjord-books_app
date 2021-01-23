@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   def create
     resource, id =  request.path.split('/')[1,2]
     @commentable = resource.singularize.classify.constantize.find(id)
-    @comment = @commentable.comments.build(comment_params)
+    @comment = @commentable.comments.build(comment_params.merge(user_id: current_user.id))
     @comment.save
     redirect_to @commentable, notice: 'コメントを投稿しました'   
   end
