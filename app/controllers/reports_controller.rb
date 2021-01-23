@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   before_action :set_current_user_report, only: %i[edit update destroy]
 
   def index
-    @reports = Report.order(:created_at=>:desc, :id=>:desc).page(params[:page])
+    @reports = Report.order(created_at: :desc, id: :desc).page(params[:page])
   end
 
   def show
@@ -18,7 +20,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
     if @report.save
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)  
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new
     end
@@ -38,7 +40,7 @@ class ReportsController < ApplicationController
   end
 
   private
-  
+
   def set_current_user_report
     @report = current_user.reports.find(params[:id])
   end

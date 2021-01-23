@@ -41,8 +41,8 @@
 <% end %>
 
 <%= form_with(model: [@report, @report.comments.build], local: true) do |f| %>
- <div class="field">
-    <%= f.text_field :body %>
+  <div class="field">
+    <%= f.text_field :body, required: 'required' %>
   </div>
 
   <div class="action">
