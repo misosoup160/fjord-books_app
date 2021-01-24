@@ -1,23 +1,25 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[show followings followers]
+
   def index
     @users = User.order(:id).page(params[:page])
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
+  def show; end
 
-  def following
-    @user = User.find(params[:id])
+  def followings
     @users = @user.followings.order(:id).page(params[:page])
-    render 'show_follow'
   end
 
   def followers
-    @user = User.find(params[:id])
     @users = @user.followers.order(:id).page(params[:page])
-    render 'show_follower'
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

@@ -1,5 +1,3 @@
-<h1>フォロー</h1>
-
 <table>
   <thead>
     <tr>
@@ -13,7 +11,7 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% users.each do |user| %>
       <tr>
         <th>
           <% if user.avatar.attached? %>
@@ -29,5 +27,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('views.common.back'), @user %>

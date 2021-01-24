@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
 class RelationshipsController < ApplicationController
+  before_action :set_user, only: %i[create destroy]
+
   def create
-    @user = User.find(params[:follow_id])
     current_user.follow(@user)
-    flash[:notice] = 'ユーザーをフォローしました'
-    redirect_to @user
+    redirect_to @user, notice: 'ユーザーをフォローしました'
   end
 
   def destroy
-    @user = User.find(params[:follow_id])
     current_user.unfollow(@user)
-    flash[:notice] = 'ユーザーのフォローを解除しました'
-    redirect_to @user
+    redirect_to @user, notice: 'ユーザーのフォローを解除しました'
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:follow_id])
   end
 end
