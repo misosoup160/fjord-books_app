@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Relationship < ApplicationRecord
-  belongs_to :user
-  belongs_to :follow, class_name: 'User'
+  belongs_to :following, class_name: 'User'
+  belongs_to :follower, class_name: 'User'
 
-  validates :user_id, uniqueness: { scope: :follow_id }
+  validates :follower_id, uniqueness: { scope: :following_id }
 end

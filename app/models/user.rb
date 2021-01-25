@@ -7,10 +7,10 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_many :relationships, dependent: :destroy
-  has_many :followings, through: :relationships, source: :follow
-  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy, inverse_of: :follow
-  has_many :followers, through: :reverse_of_relationships, source: :user
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy, inverse_of: :follower
+  has_many :followings, through: :active_relationships, source: :following
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'following_id', dependent: :destroy, inverse_of: :following
+  has_many :followers, through: :reverse_of_relationships, source: :follower
 
   validates :uid, uniqueness: { scope: :provider }, if: -> { uid.present? }
 
@@ -23,11 +23,11 @@ class User < ApplicationRecord
   end
 
   def follow(other_user)
-    relationships.find_or_create_by!(follow_id: other_user.id) unless self == other_user
+    active_relationships.find_or_create_by!(following_id: other_user.id) unless self == other_user
   end
 
   def unfollow(other_user)
-    relationships.find_by(follow_id: other_user.id).destroy
+    active_relationships.find_by(following_id: other_user.id).destroy
   end
 
   def following?(other_user)
