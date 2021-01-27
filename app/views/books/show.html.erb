@@ -23,13 +23,13 @@
 </p>
 
 <% if @book.comments.any? %>
-  <h2>コメント</h2>
+  <h2><%= t('views.common.comment') %></h2>
   <table>
     <% @book.comments.each do |comment| %>
       <tr>
         <td><%= comment.body %></td>
         <td><%= comment.user.name.empty? ? comment.user.email : comment.user.name %></td>
-        <td><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= l comment.created_at, format: :long %></td>
       </tr>
     <% end %>
   </table>
@@ -37,11 +37,11 @@
 
 <%= form_with(model: [@book, @book.comments.build], local: true) do |f| %>
   <div class="field">
-    <%= f.text_field :body %>
+    <%= f.text_field :body, required: 'required' %>
   </div>
 
   <div class="action">
-    <%= f.submit 'コメントする' %>
+    <%= f.submit t('views.common.comment_new') %>
   </div>
 <% end %>
 
