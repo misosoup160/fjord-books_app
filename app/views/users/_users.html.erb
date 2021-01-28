@@ -13,11 +13,11 @@
   <tbody>
     <% users.each do |user| %>
       <tr>
-        <th>
+        <td>
           <% if user.avatar.attached? %>
             <%= image_tag user.avatar.variant(resize_to_fill: [30, 30])%>
           <% end %>
-        </th>
+        </td>
         <td><%= user.email %></td>
         <td><%= user.name %></td>
         <td><%= user.postal_code %></td>
