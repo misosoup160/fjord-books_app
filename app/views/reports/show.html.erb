@@ -1,0 +1,55 @@
+<h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
+
+<p>
+  <strong><%= Report.human_attribute_name(:title) %>:</strong>
+  <%= @report.title %>
+</p>
+
+<p>
+  <strong><%= Report.human_attribute_name(:description) %>:</strong>
+  <%= @report.description %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:name) %>:</strong>
+  <%= @report.user.name.empty? ? @report.user.email : @report.user.name %>
+</p>
+
+<p>
+  <strong><%= Report.human_attribute_name(:created_at) %>:</strong>
+  <%= l @report.created_at, format: :long %>
+</p>
+
+<p>
+  <strong><%= Report.human_attribute_name(:updated_at) %>:</strong>
+  <%= l @report.updated_at, format: :long %>
+</p>
+
+<% if @report.comments.any? %>
+  <h2><%= t('views.common.comment') %></h2>
+  <table>
+    <% @report.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.body %></td>
+        <td><%= comment.user.name.empty? ? comment.user.email : comment.user.name %></td>
+        <td><%= l comment.created_at, format: :long %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<%= form_with(model: [@report, @report.comments.build], local: true) do |f| %>
+  <div class="field">
+    <%= f.text_field :body, required: 'required' %>
+  </div>
+
+  <div class="action">
+    <%= f.submit t('views.common.comment_new') %>
+  </div>
+<% end %>
+
+<% if @report.user_id == current_user.id %>
+  <%= link_to t('views.common.edit'), edit_report_path(@report) %> |
+  <%= link_to t('views.common.destroy'), @report, method: :delete, data: { confirm: t('views.common.delete_confirm') } %> |
+<% end %>
+<%= link_to t('views.common.back'), reports_path %>

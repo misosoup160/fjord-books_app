@@ -22,5 +22,28 @@
   <%= image_tag(@book.picture_url) if @book.picture.present? %>
 </p>
 
+<% if @book.comments.any? %>
+  <h2><%= t('views.common.comment') %></h2>
+  <table>
+    <% @book.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.body %></td>
+        <td><%= comment.user.name.empty? ? comment.user.email : comment.user.name %></td>
+        <td><%= l comment.created_at, format: :long %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<%= form_with(model: [@book, @book.comments.build], local: true) do |f| %>
+  <div class="field">
+    <%= f.text_field :body, required: 'required' %>
+  </div>
+
+  <div class="action">
+    <%= f.submit t('views.common.comment_new') %>
+  </div>
+<% end %>
+
 <%= link_to t('views.common.edit'), edit_book_path(@book) %> |
 <%= link_to t('views.common.back'), books_path %>
