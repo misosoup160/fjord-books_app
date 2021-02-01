@@ -55,7 +55,7 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text 'タイトルC'
   end
 
-  test 'destroying a Book' do
+  test 'destroying a Report' do
     visit reports_url
     page.accept_confirm do
       click_on '削除', match: :first
