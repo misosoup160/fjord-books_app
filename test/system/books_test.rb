@@ -4,12 +4,7 @@ require 'application_system_test_case'
 
 class BooksTest < ApplicationSystemTestCase
   setup do
-    @book = books(:cherry_book)
-
-    visit root_url
-    fill_in 'Eメール', with: 'alice@example.com'
-    fill_in 'パスワード', with: 'password'
-    click_button 'ログイン'
+    login_as(users(:alice))
   end
 
   test 'visiting the index' do
@@ -48,11 +43,14 @@ class BooksTest < ApplicationSystemTestCase
   end
 
   test 'destroying a Book' do
+    book = books(:cherry_book)
     visit books_url
+    assert_text book.title
     page.accept_confirm do
       click_on '削除', match: :first
     end
 
     assert_text '本が削除されました'
+    assert_no_text book.title
   end
 end

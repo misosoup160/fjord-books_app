@@ -9,6 +9,12 @@ class ReportTest < ActiveSupport::TestCase
     assert report.editable?(alice)
   end
 
+  test '#editable? target_user not editable' do
+    bob = users(:bob)
+    report = reports(:one)
+    assert_not report.editable?(bob)
+  end
+
   test '#created_on' do
     report = reports(:one)
     date = Date.new(2021, 1, 26)
