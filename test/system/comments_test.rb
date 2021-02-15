@@ -15,6 +15,7 @@ class CommentsTest < ApplicationSystemTestCase
     fill_in 'comment_content', with: 'とてもいいと思います'
     click_button 'コメントする'
     assert_text 'とてもいいと思います'
+    assert_text 'コメントが投稿されました。'
     assert_no_text '（コメントがありません）'
   end
 
@@ -27,6 +28,7 @@ class CommentsTest < ApplicationSystemTestCase
     fill_in 'comment_content', with: 'とてもいいと思います'
     click_button 'コメントする'
     assert_text 'とてもいいと思います'
+    assert_text 'コメントが投稿されました。'
     assert_no_text '（コメントがありません）'
   end
 end
